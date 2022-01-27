@@ -49,4 +49,15 @@
         android:text="cancel"
         app:layout_constraintBaseline_toBaselineOf="@+id/btnLogin"
         app:layout_constraintStart_toEndOf="@+id/btnLogin" />
+
+    <TextView
+        android:id="@+id/tvMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:text="TextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnLogin" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
