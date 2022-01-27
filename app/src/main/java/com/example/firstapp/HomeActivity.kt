@@ -9,11 +9,13 @@ import android.net.Uri
 import android.view.View
 
 class HomeActivity : AppCompatActivity() {
+
+    lateinit var tvHome:TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         var name = intent.extras?.getString("ba")
-        var tvHome = findViewById<TextView>(R.id.tvHome)
+        tvHome = findViewById(R.id.tvHome)
         tvHome.text = name
     }
     fun handleClick(view: android.view.View) {
@@ -34,6 +36,13 @@ class HomeActivity : AppCompatActivity() {
             var intent: Intent
             intent = Intent(this, MainActivity::class.java)
             intent.putExtra("ap", "avichal pathak")
-            startActivity(intent)
+            startActivityForResult(intent,123)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == RESULT_OK && requestCode == 123){
+            tvHome.text = data?.extras?.getString("con")
+        }
     }
 }
