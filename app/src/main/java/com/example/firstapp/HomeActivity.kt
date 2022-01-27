@@ -3,6 +3,7 @@ package com.example.firstapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import android.content.Intent
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -10,6 +11,8 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
     }
     fun handleClick(view: android.view.View) {
-        Toast.makeText(this,"sending",Toast.LENGTH_SHORT).show()
+        var intent: Intent
+        intent = Intent(this,MainActivity::class.java)
+        startActivity(intent)
     }
 }
