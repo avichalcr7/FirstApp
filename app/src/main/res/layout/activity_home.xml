@@ -24,10 +24,21 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="6dp"
         android:layout_marginTop="22dp"
-        android:text="send"
+        android:text="dial"
         android:onClick="handleClick"
         app:layout_constraintStart_toStartOf="@+id/etContact"
         app:layout_constraintTop_toBottomOf="@+id/etContact" />
+
+    <Button
+        android:id="@+id/btnMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="22dp"
+        android:onClick="handleClick"
+        android:text="main"
+        app:layout_constraintBaseline_toBaselineOf="@+id/btnSend"
+        app:layout_constraintStart_toEndOf="@+id/btnSend"/>
 
     <TextView
         android:id="@+id/tvHome"
