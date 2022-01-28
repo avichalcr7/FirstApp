@@ -9,16 +9,24 @@ import android.view.View;
 import android.widget.Toast;
 import android.widget.TextView;
 import android.provider.AlarmClock;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.Spinner;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        String name = getIntent().getExtras().getString("ap");
+        Button mButton = findViewById(R.id.btnDemo);
+        mButton.setOnClickListener(this); //hey the implementation for this onclick is in this class
+
+        Spinner cSpinner = findViewById(R.id.dishesSpinner);
+        cSpinner.setOnItemSelectedListener(this);
+        /*String name = getIntent().getExtras().getString("ap");
         TextView mTextView = findViewById(R.id.tvMain);
-        mTextView.setText(name);
+        mTextView.setText(name);*/
     }
 
     public void clickHandler(View view) {
@@ -35,12 +43,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void sendContact(){
+    private void sendContact() {
         EditText nameEditText = findViewById(R.id.etName);
         String contact = nameEditText.getText().toString();
         Intent cIntent = new Intent();
-        cIntent.putExtra("con",contact);
-        setResult(RESULT_OK,cIntent);
+        cIntent.putExtra("con", contact);
+        setResult(RESULT_OK, cIntent);
         finish();
     }
 
@@ -60,5 +68,21 @@ public class MainActivity extends AppCompatActivity {
         mIntent = new Intent(MainActivity.this, HomeActivity.class);
         mIntent.putExtra("ba", "barry allen");
         startActivity(mIntent);
+    }
+
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(this, "button clicked", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
+        String itemName = adapterView.getItemAtPosition(position).toString();
+        Toast.makeText(this, itemName, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
     }
 }
