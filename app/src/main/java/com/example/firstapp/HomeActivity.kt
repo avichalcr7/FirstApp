@@ -6,6 +6,7 @@ import android.widget.Toast
 import android.widget.TextView
 import android.content.Intent
 import android.net.Uri
+import android.provider.ContactsContract
 import android.view.View
 import android.widget.EditText
 
@@ -13,6 +14,7 @@ class HomeActivity : AppCompatActivity(), View.OnFocusChangeListener {
 
     lateinit var tvHome:TextView
     lateinit var etContact:EditText
+    lateinit var etEmail: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
@@ -20,8 +22,41 @@ class HomeActivity : AppCompatActivity(), View.OnFocusChangeListener {
         tvHome = findViewById(R.id.tvHome)
        // tvHome.text = name
         etContact = findViewById(R.id.etContact)
+        etEmail = findViewById(R.id.etEmail)
 
         etContact.setOnFocusChangeListener(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        storeState();
+    }
+    private fun storeState() {
+        var contact: String = etContact.text.toString()
+        var email = etEmail.text.toString()
+        //create file home_state_prefs
+        var sharedPreferences = getSharedPreferences("home_state_prefs", MODE_PRIVATE)
+        //open the file in edit mode
+        var editor = sharedPreferences.edit()
+        //write the data to the file
+        editor.putString("cont",contact)
+        editor.putString("eml",email)
+        //save the file
+        editor.apply()
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+        restoreState();
+    }
+
+    private fun restoreState() {
+        var sharedPreferences = getSharedPreferences("home_state_prefs", MODE_PRIVATE)
+        var contact = sharedPreferences.getString("cont","")
+        var email = sharedPreferences.getString("eml","")
+        etContact.setText(contact)
+        etEmail.setText(email)
     }
     fun handleClick(view: android.view.View) {
         when(view.id){
